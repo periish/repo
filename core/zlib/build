@@ -1,9 +1,15 @@
 #!/bin/sh -e
 
+# Pain.
 ./configure \
-    --prefix=/usr \
-    --libdir=/usr/lib \
+    --prefix="/pkg/$3" \
+    --includedir="/pkg/$3/inc" \
+    --libdir="/pkg/$3/lib" \
+    --sharedlibdir="/pkg/$3/lib" \
     --shared
 
 make
 make DESTDIR="$1" install
+
+mv "$1/pkg/$3/share/man" "$1/pkg/$3/man"
+rm -rf "$1/pkg/$3/share"

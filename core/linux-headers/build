@@ -4,6 +4,7 @@ make HOSTCC="${CC:-cc}" headers
 
 # The headers require rsync for installation, this command
 # simply does the equivalent using find.
+
 find usr/include -name \*.h -type f | while read -r file; do
-    install -Dm644 "$file" "$1/$file"
+    install -Dm644 "$file" "$1/pkg/$3/inc/${file#usr/include}"
 done

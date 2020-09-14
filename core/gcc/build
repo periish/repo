@@ -14,7 +14,7 @@ cd gcc-build
 
 # Grab the system's GCC version.
 IFS=. read -r gcc_version _ 2>/dev/null \
-    < "$KISS_ROOT/var/db/kiss/installed/gcc/version" || gcc_version=null
+    < "$KISS_ROOT/pkg/db/gcc/version" || gcc_version=null
 
 # Skip the bootstrap process if we are able.
 case $2 in "$gcc_version"*)
@@ -24,11 +24,7 @@ esac
 
 export libat_cv_have_ifunc=no
 
-../gcc/configure \
-    --prefix=/usr \
-    --libexecdir=/usr/lib \
-    --mandir=/usr/share/man \
-    --infodir=/usr/share/info \
+CONFIGURE_PATH="../gcc/configure" kiss-macros configure \
     --disable-multilib \
     --disable-symvers \
     --disable-libmpx \
@@ -60,15 +56,15 @@ find "$1" -name libgjsmalsa.a -exec rm -f {} +
 find "$1" -name libgij.a      -exec rm -f {} +
 
 # Some legacy programs will expect cc
-ln -s gcc "$1/usr/bin/cc"
+ln -s gcc "$1/pkg/$3/exec/cc"
 
 # POSIX compliance.
-install -Dm755 ../c99 "$1/usr/bin/c99"
+install -Dm755 ../c99 "$1/pkg/$3/exec/c99"
 
 # Symlink for LTO.
 {
-    mkdir -p "$1/usr/lib/bfd-plugins"
+    mkdir -p "$1/pkg/$3/lib/bfd-plugins"
 
-    ln -s "/usr/lib/gcc/x86_64-pc-linux-musl/$2/liblto_plugin.so" \
-          "$1/usr/lib/bfd-plugins/liblto_plugin.so"
+    ln -s "/pkg/$3/lib/x86_64-pc-linux-musl/$2/liblto_plugin.so" \
+          "$1/pkg/$3/lib/bfd-plugins/liblto_plugin.so"
 }

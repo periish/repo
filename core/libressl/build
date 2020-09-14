@@ -1,10 +1,8 @@
 #!/bin/sh -e
 
-./configure \
-    --prefix=/usr \
-    --sysconfdir=/etc
+kiss-macros configure
 
 make
 make DESTDIR="$1" install
 
-install -Dm 755 update-certdata.sh "$1/etc/ssl"
+install -Dm 755 update-certdata.sh "$1/conf/ssl"

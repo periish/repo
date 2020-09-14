@@ -1,6 +1,6 @@
 # crypttab: mappings for encrypted partitions
 #
-# Each mapped device will be created in /dev/mapper, so your /etc/fstab
+# Each mapped device will be created in /dev/mapper, so your /conf/fstab
 # should use the /dev/mapper/<name> paths for encrypted devices.
 #
 # NOTE: Do not list your root (/) partition here.

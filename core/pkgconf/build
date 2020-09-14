@@ -1,10 +1,8 @@
 #!/bin/sh -e
 
-./configure \
-    --prefix=/usr \
-    --sysconfdir=/etc
+kiss-macros configure
 
 make
 make DESTDIR="$1" install
 
-ln -s pkgconf "$1/usr/bin/pkg-config"
+ln -s pkgconf "$1/pkg/$3/exec/pkg-config"
