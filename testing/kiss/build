@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+# We reference the package name directly to allow bootstrapping.
+
+mkdir -p "$1/pkg/kiss/exec"
+
+# Install kiss utilities.
+cp -f kiss contrib/* "$1/pkg/kiss/exec"
+
+# Install distribution documentation.
+for doc in docs/site/*.txt; do
+    install -Dm644 "$doc" "$1/pkg/kiss/doc/kiss/${doc##*/}"
+done
+
+# Install the Wiki.
+cp -r wiki "$1/pkg/kiss/doc/kiss/wiki"
+
+# Remove unnecessary pages.
+rm -f "$1/pkg/kiss/doc/kiss/wiki/README.txt" \
+      "$1/pkg/kiss/doc/kiss/news.txt" \
+      "$1/pkg/kiss/doc/kiss/blog.txt" \
+      "$1/pkg/kiss/doc/kiss/screenshots.txt"
