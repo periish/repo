@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+kiss-macros configure \
+    --with-libedit
+
+make DESTDIR="$1" install
+
+# I have failed...
+ln -s /pkg/dash/exec/dash "$1/bin/sh"

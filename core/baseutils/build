@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+export CFLAGS="$CFLAGS -fcommon"
+
+make
+make  MANDIR="$1/pkg/$3/man" install
