@@ -4,8 +4,7 @@
 # for conversion of rules files. See files/xml2lst.
 sed -i 's/perl //;s/xml2lst\.pl/xml2lst/' rules/Makefile.in
 
-./configure \
-    --prefix=/usr \
+kiss-macros configure \
     --with-xkb-rules-symlink=xfree86,xorg \
     --enable-compat-rules \
     --without-xsltproc \

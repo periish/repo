@@ -1,8 +1,6 @@
 #!/bin/sh -e
 
-./configure \
-    --prefix=/usr \
-    --with-fontrootdir=/usr/share/fonts/X11
+kiss-macros configure
 
 make
 make DESTDIR="$1" install

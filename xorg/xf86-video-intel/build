@@ -3,9 +3,7 @@
 export DESTDIR="$1"
 export LDFLAGS="$LDFLAGS -Wl,-z,lazy"
 
-meson \
-    --prefix=/usr \
-    --libexecdir=/usr/lib \
+kiss-macros meson \
     -Ddefault-dri=3 \
     -Dxvmc=false \
     -Dvalgrind=false \

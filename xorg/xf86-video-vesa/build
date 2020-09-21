@@ -2,8 +2,7 @@
 
 export LDFLAGS="-Wl,-z,lazy"
 
-./configure \
-    --prefix=/usr
+kiss-macros configure
 
 make
 make DESTDIR="$1" install

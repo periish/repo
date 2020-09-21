@@ -1,8 +1,7 @@
 #!/bin/sh -e
 
 CFLAGS_FOR_BUILD=-fPIC \
-./configure \
-    --prefix=/usr \
+kiss-macros configure \
     --without-xmlto \
     --disable-specs \
     --enable-static
@@ -12,4 +11,4 @@ make DESTDIR="$1" install
 
 # This will be removed once 'xorgproto' 2019.2
 # is released.
-rm -f "$1/usr/include/X11/extensions/XKBgeom.h"
+rm -f "$1/pkg/$3/inc/X11/extensions/XKBgeom.h"

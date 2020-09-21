@@ -1,9 +1,6 @@
 #!/bin/sh -e
 
-./configure \
-    --prefix=/usr \
-    --mandir=/usr/share/man \
-    --localstatedir=/var
+kiss-macros configure
 
 make
 make DESTDIR="$1" install

@@ -1,7 +1,6 @@
 #!/bin/sh -e
 
-./configure \
-    --prefix=/usr \
+kiss-macros configure \
     --with-shared-memory-dir=/dev/shm
 
 make
