@@ -7,8 +7,7 @@ sed -i "s/BUILD_SPHINX_FALSE='#'/BUILD_SPHINX_FALSE=/" configure
 # Disable building tests.
 sed -i 's/test perf//g' Makefile.in
 
-./configure \
-    --prefix=/usr \
+kiss-macros configure \
     --disable-static \
     --enable-tee \
     --enable-gl \

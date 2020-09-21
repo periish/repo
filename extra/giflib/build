@@ -1,4 +1,4 @@
 #!/bin/sh -e
 
 make
-make DESTDIR="$1" PREFIX=/usr install
+make DESTDIR="$1" PREFIX="/pkg/$3" MANDIR="/pkg/$3/man" BINDIR="/pkg/$3/exec" INCDIR="/pkg/$3/inc" install

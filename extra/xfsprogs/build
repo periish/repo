@@ -3,14 +3,13 @@
 # Remove incorrect bash dependency.
 sed -i 's/bash/sh/' install-sh
 
-./configure \
-    --prefix=/usr \
-    --sbindir=/usr/bin \
+kiss-macros configure \
     --disable-gettext
 
 make
 make \
     DIST_ROOT="$1" \
-    PKG_ROOT_SBIN_DIR=/usr/bin \
-    PKG_ROOT_LIB_DIR=/usr/lib \
+    PKG_ROOT_SBIN_DIR="/pkg/$3/exec" \
+    PKG_ROOT_BIN_DIR="/pkg/$3/exec" \
+    PKG_ROOT_LIB_DIR="/pkg/$3/lib" \
     install

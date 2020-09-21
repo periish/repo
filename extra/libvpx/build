@@ -8,7 +8,7 @@ patch -p1 < fix-busybox-diff.patch
 sed -i 's/perl/:/g' configure
 
 ./configure \
-    --prefix=/usr \
+    --prefix="/pkg/$3" \
     --enable-vp8 \
     --enable-vp9 \
     --enable-experimental \
@@ -27,3 +27,5 @@ sed -i 's/perl/:/g' configure
 
 make
 make DESTDIR="$1" install
+# libvpx uses a custom configure which has effectively no directives....
+mv "$1/pkg/$3/include" "$1/pkg/$3/inc"

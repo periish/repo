@@ -1,9 +1,7 @@
 #!/bin/sh -e
 
-./configure \
-    --prefix=/usr \
-    --sbindir=/usr/bin \
-    --with-udev-rules-dir=/usr/lib/udev/rules.d \
+kiss-macros configure \
+    --with-udev-rules-dir=/conf/udev/rules.d \
     --disable-alsaconf \
     --disable-bat \
     --disable-xmlto \

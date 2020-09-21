@@ -5,8 +5,7 @@ patch -p1 < no-fribidi.patch
 sed -i 's/as_fn_error.*fribidi/: 0 "/'  configure
 sed -i '/pkg_requires="fribidi >= .*/d' configure
 
-./configure \
-    --prefix=/usr \
+kiss-macros configure \
     --enable-fontconfig \
     --disable-harfbuzz
 

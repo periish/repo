@@ -6,8 +6,7 @@ sed -i 's/perl/awk -f/;s/mkproto.pl/mkproto.awk/' Makefile.in
 
 export CFLAGS="-static $CFLAGS"
 
-./configure \
-    --prefix=/usr \
+kiss-macros configure \
     --with-included-popt \
     --disable-xxhash \
     --disable-zstd \

@@ -1,11 +1,6 @@
 #!/bin/sh -e
 
-./configure \
-    --prefix=/usr \
-    --localstatedir=/var \
-    --bindir=/usr/bin \
-    --sbindir=/usr/bin \
-    --libdir=/usr/lib \
+kiss-macros configure \
     --enable-libuuid \
     --enable-libblkid \
     --enable-fsck \
@@ -19,5 +14,9 @@ make
 make DESTDIR="$1" install
 
 # Fix broken --sbindir.
-mv -f "$1/usr/sbin/"* "$1/usr/bin"
-rmdir "$1/usr/sbin"
+mv -f "$1/pkg/$3/sbin/"* "$1/pkg/$3/exec"
+rmdir "$1/pkg/$3/sbin"
+
+# Fix broken --bindir...
+mv -f "$1/pkg/$3/bin/"* "$1/pkg/$3/exec"
+rmdir "$1/pkg/$3/bin"

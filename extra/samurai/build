@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
-make PREFIX=/usr
-make PREFIX=/usr DESTDIR="$1" install
+make PREFIX="/pkg/$3"
+make PREFIX="/pkg/$3" MANDIR="/pkg/$3/man" DESTDIR="$1" install
 
-ln -s samu "$1/usr/bin/ninja"
+mv "$1/pkg/$3/bin" "$1/pkg/$3/exec"
+ln -s samu "$1/pkg/$3/exec/ninja"

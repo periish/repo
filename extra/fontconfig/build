@@ -2,12 +2,9 @@
 
 patch -p1 < fontconfig-fix-1744377.patch
 
-./configure \
+kiss-macros configure \
     AUTOMAKE=/bin/true \
-    --prefix=/usr \
-    --localstatedir=/var \
-    --sysconfdir=/etc \
-    --with-xmldir=/etc/fonts \
+    --with-xmldir=/conf/fonts \
     --disable-nls
 
 make

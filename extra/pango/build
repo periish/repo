@@ -5,8 +5,7 @@ export DESTDIR="$1"
 sed -i "/subdir('tests')/d"    meson.build
 sed -i "/subdir('examples')/d" meson.build
 
-meson \
-    --prefix=/usr \
+kiss-macros meson \
     -Dgir=false \
     -Dgtk_doc=false \
     -Dintrospection=false \

@@ -1,11 +1,13 @@
 #!/bin/sh -e
 
 make \
-    prefix=/usr \
+    prefix="/pkg/$3" \
+    BINDIR="/pkg/$3/exec" \
     CC="${CC:-cc} $CFLAGS $CXXFLAGS" \
     -f unix/Makefile generic
 
 make \
-    prefix="$1/usr" \
-    MANDIR="$1/usr/share/man/man1" \
+    prefix="$1/pkg/$3" \
+    MANDIR="$1/pkg/$3/man/man1" \
+    BINDIR="$1/pkg/$3/exec" \
     -f unix/Makefile install

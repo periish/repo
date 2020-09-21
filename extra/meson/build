@@ -3,5 +3,11 @@
 python setup.py build
 python setup.py install \
     --root="$1" \
+    --prefix="/pkg/$3" \
+    --exec-prefix="/pkg/$3/exec" \
     --optimize=1 \
     --skip-build
+
+mv "$1/pkg/$3/bin" "$1/pkg/$3/exec"
+mv "$1/pkg/$3/share/man" "$1/pkg/$3/man"
+rm -rf "$1/pkg/$3/share"

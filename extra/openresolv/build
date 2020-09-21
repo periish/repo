@@ -1,9 +1,6 @@
 #!/bin/sh -e
 
-./configure \
-    --prefix=/usr \
-    --sbindir=/usr/bin \
-    --sysconfdir=/etc
+kiss-macros configure
 
 make
 make DESTDIR="$1" install

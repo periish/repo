@@ -3,15 +3,11 @@
 export DESTDIR="$1"
 
 pkg-config --exists libudev || {
-    printf 'udev (or libudev-zero) is required\n'
+    printf 'eudev (or libudev-zero) is required\n'
     exit 1
 }
 
-meson \
-    --prefix=/usr \
-    --sysconfdir=/etc \
-    --mandir=/usr/share/man \
-    --libexecdir=/usr/lib \
+kiss-macros meson \
     -Ddebug-gui=false \
     -Ddocumentation=false \
     -Dtests=false \

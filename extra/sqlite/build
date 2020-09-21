@@ -4,8 +4,7 @@ export CPPFLAGS="-DSQLITE_ENABLE_COLUMN_METADATA=1"
 
 sed -i 's/ -ltinfo//g' configure
 
-./configure \
-    --prefix=/usr \
+kiss-macros configure \
     --enable-threadsafe \
     --enable-dynamic-extensions \
     --enable-fts5

@@ -4,10 +4,7 @@ export DESTDIR="$1"
 
 sed -i "/subdir('tests')/d" meson.build
 
-meson \
-    --prefix=/usr \
-    --sysconfdir=/etc \
-    --mandir=/usr/share/man \
+kiss-macros meson \
     -Dgir=false \
     -Djasper=false \
     -Dpng=true \

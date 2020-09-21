@@ -1,9 +1,11 @@
 #!/bin/sh -e
 
-./configure \
-    --prefix=/usr \
+kiss-macros configure \
     --enable-cxx \
     --without-x
 
 make
 make DESTDIR="$1" install
+
+mv "$1/pkg/$3/share/doc" "$1/pkg/$3/doc"
+rm -rf "$1/pkg/$3/share"

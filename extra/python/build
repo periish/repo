@@ -13,8 +13,7 @@ export LDFLAGS="$LDFLAGS -fno-semantic-interposition"
 
 patch -p1 < python3-always-pip.patch
 
-./configure \
-    --prefix=/usr \
+kiss-macros configure \
     --enable-shared \
     --with-system-expat \
     --with-system-ffi \
@@ -24,11 +23,11 @@ patch -p1 < python3-always-pip.patch
 make
 make DESTDIR="$1" install
 
-ln -s python3 "$1/usr/bin/python"
-ln -s pip3    "$1/usr/bin/pip"
+ln -s python3 "$1/pkg/$3/exec/python"
+ln -s pip3    "$1/pkg/$3/exec/pip"
 
 # Make static library writable.
-chmod u+w "$1/usr/lib/libpython"*
+chmod u+w "$1/pkg/$3/lib/libpython"*
 
 # Let's make some kind of effort to reduce the overall
 # size of Python by removing a bunch of rarely used and
@@ -37,10 +36,16 @@ chmod u+w "$1/usr/lib/libpython"*
 # This can't be done via ./configure as the build system
 # doesn't give you this much control over the process.
 {
-    cd "$1/usr/lib/python"*
+    cd "$1/pkg/$3/lib/python"*
     rm -rf test ./*/test ./*/tests
     rm -rf pydoc* idlelib turtle* config-* ensurepip
 
-    cd "$1/usr/bin"
+    cd "$1/pkg/$3/exec"
     rm -f pydoc* idle*
 }
+
+# Python is stupid.
+mv "$1/pkg/$3/bin/"* "$1/pkg/$3/exec"
+rm -rf "$1/pkg/$3/bin"
+mv "$1/pkg/$3/include/python3.8/pyconfig.h" "$1/pkg/$3/inc"
+rm -rf "$1/pkg/$3/include"

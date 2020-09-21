@@ -3,6 +3,10 @@
 sed -i '/chown/d' bsd.prog.mk
 
 ./configure \
+    --prefix="/pkg/$3" \
+    --bindir="/pkg/$3/exec" \
+    --sysconfdir=/conf \
+    --mandir="/pkg/$3/man" \
     --enable-static \
     --with-shadow \
     --with-timestamp \
@@ -11,4 +15,4 @@ sed -i '/chown/d' bsd.prog.mk
 make
 make DESTDIR="$1" install
 
-install -Dm600 doas.conf "$1/etc/doas.conf"
+install -Dm600 doas.conf "$1/conf/doas.conf"

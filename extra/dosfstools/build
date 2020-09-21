@@ -1,9 +1,6 @@
 #!/bin/sh -e
 
-./configure \
-    --prefix=/usr \
-    --sbindir=/usr/bin \
-    --mandir=/usr/share/man \
+kiss-macros configure \
     --enable-compat-symlinks
 
 make

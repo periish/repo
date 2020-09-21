@@ -2,10 +2,7 @@
 
 export DESTDIR="$1"
 
-meson \
-    --prefix=/usr \
-    --sysconfdir=/etc \
-    --mandir=/usr/share/man \
+kiss-macros meson \
     -Dhas-dlvsym=false \
     . output
 

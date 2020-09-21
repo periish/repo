@@ -7,8 +7,12 @@ export CFLAGS="$CFLAGS -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE"
 
 ./Configure \
     -des \
-    -Dprefix=/usr \
-    -Dvendorprefix=/usr \
+    -Dprefix="/pkg/$3" \
+    -Dvendorprefix="/pkg/$3" \
+    -Dman1dir="/pkg/$3/man/man1" \
+    -Dman3dir="/pkg/$3/man/man3" \
+    -Dbin="/pkg/$3/exec" \
+    -Dscriptdir="/pkg/$3/exec" \
     -Dusevendorprefix \
     -Duseshrplib \
     -Dusesoname \
@@ -27,6 +31,7 @@ export CFLAGS="$CFLAGS -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE"
     -Dperl_static_inline="static __inline__" \
     -Dd_static_inline
 
+sh
 make
 make DESTDIR="$1" install
 
@@ -40,4 +45,5 @@ find "$1" -name \*.bs        -exec rm -f {} +
 find "$1" -name \*.0 -type f -exec rm -f {} +
 
 # Fix permissions.
-find "$1/usr/lib" -type f -exec chmod 644 {} \;
+find "$1/pkg/$3/lib" -type f -exec chmod 644 {} \;
+#xmv "$1/pkg/$3/bin" "$1/pkg/$3/exec"

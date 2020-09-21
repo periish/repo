@@ -10,8 +10,7 @@ sed -i 's/libmount_dep.found()/false/' meson.build
 find . -type f -name meson.build -exec \
     sed -i "/subdir('tests')/d;/subdir('fuzzing')/d" {} +
 
-meson \
-    --prefix=/usr \
+kiss-macros meson \
     -Dlibmount=disabled \
     -Dinstalled_tests=false \
     -Ddefault_library=both \
@@ -32,16 +31,13 @@ ninja -C build install
 
     # This mess of CFLAGS, etc is needed to point json-glib to
     # the freshly built glib sources instead of the system's.
-    export PKG_CONFIG_PATH="$1/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
-    export PATH="$1/usr/bin:$PATH"
-    export CFLAGS="$CFLAGS -I$1/usr/include/glib-2.0"
-    export CFLAGS="$CFLAGS -I$1/usr/lib/glib-2.0/include -pthread"
-    export LDFLAGS="$LDFLAGS -L$1/usr/lib/"
+    export PKG_CONFIG_PATH="$1/pkg/$3/lib/pkgconfig:$PKG_CONFIG_PATH"
+    export PATH="$1/pkg/$3/exec:$PATH"
+    export CFLAGS="$CFLAGS -I$1/pkg/$3/inc/glib-2.0"
+    export CFLAGS="$CFLAGS -I$1/pkg/$3/lib/glib-2.0/include -pthread"
+    export LDFLAGS="$LDFLAGS -L$1/pkg/$3/lib/"
 
-    meson \
-        --prefix=/usr \
-        --sysconfdir=/etc \
-        --mandir=/usr/share/man \
+    kiss-macros meson \
         -Ddocs=false \
         -Dintrospection=false \
         . output
@@ -50,4 +46,4 @@ ninja -C build install
     ninja -C output install
 }
 
-kiss l dbus >/dev/null || rm -rf "$1/usr/bin/gdbus"
+kiss l dbus >/dev/null || rm -rf "$1/pkg/$3/exec/gdbus"

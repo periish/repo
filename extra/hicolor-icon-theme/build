@@ -1,6 +1,5 @@
 #!/bin/sh -e
 
-./configure \
-    --prefix=/usr
+kiss-macros configure
 
 make DESTDIR="$1" install
